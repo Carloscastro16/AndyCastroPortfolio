@@ -1,3 +1,5 @@
+/*--- Variables y Defaults ---*/
+
 :root{
     --fondo-oscuro: #101010;
     --componentes: #171717;
@@ -12,17 +14,12 @@
 
 html {
     height: 100vh;
-    width: 100vw;
     background: rgb(0,0,0);
     background: var(--fondo-oscuro)
 }
 body {
     height: 100%;
     background: var(--fondo-oscuro);
-    background: url('../img/portada-img.jpg');
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    background-size: cover;
     font-family: 'Montserrat', sans-serif !important;
 }
 
@@ -39,7 +36,9 @@ body {
     backdrop-filter: blur(5px);
 } */
 
-/*------ Zona del Header ------*/
+
+
+/*--------- Zona del Header ---------*/
 
 h1{
     color: var(--letras-destacadas);
@@ -56,7 +55,7 @@ h2{
     color: var(--blanco);
 }
 
-/* Barra de navegacion */
+/*--------- Barra de navegacion ---------*/
 .navbar a{
     color: var(--letras-destacadas);
     font-weight: 700;
@@ -69,6 +68,14 @@ h2{
 }
 
 header{
+    height: 100vh;
+    width: auto;
+    background: url('../img/portada-img.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+nav{
     margin-top: 0;
     margin-inline: 4rem;
 }
@@ -105,4 +112,97 @@ header{
 #map{
     height: 500px;
     width: 100%;
+}
+
+
+/*--------- Animacion aparicion ---------*/
+.revelado{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+.revelado.active{
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+
+/*--------- Primera zona: Skills ---------*/
+.skillset .container{
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.skillset img{
+    width: 3rem;
+    animation: upDown 2.5s ease infinite;
+    margin: 1rem;
+    filter: drop-shadow(2px 2px 1px var(--letras-destacadas) );
+}
+@keyframes upDown {
+    50%{
+        transform: translateY(2px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+/*--------- Segunda Zona: sobre mi ---------*/
+.aboutMe{
+    height: 80vh;
+}
+.aboutMe .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.aboutMe .row{
+    align-items: center;
+    justify-content: center;
+}
+.circ1{
+    border-radius: 50%;
+    width: 15rem;
+    height: 15rem;
+    display: flex;
+    background-color: var(--gradiante-letras-dest);
+    position: absolute;
+    margin-left: 8rem;
+}
+.circ2{
+    border-radius: 50%;
+    width: 18rem;
+    height: 18rem;
+    display: flex;
+    background-color: var(--gradiante-letras-dest);
+    position: absolute;
+    right: 8rem;
+    margin-top: 13rem;
+}
+.aboutMe .container .texto{
+    position: relative;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(50px);
+    border-radius: 15px;
+    padding: 2rem 3rem;
+    height: 22rem;
+    transition: 2s;
+    width: 70vw;
+}
+.aboutMe .titulo{
+    color: var(--titulillos);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.titulo h3{
+    font-size: 2rem;
+}
+.texto p{
+    color: var(--blanco);
 }
