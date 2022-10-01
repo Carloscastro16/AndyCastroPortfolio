@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Styles/style.css">
 </head>
 <body>
     <style>
@@ -13,28 +15,57 @@
             width: 100vw;
         }
     </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="">Buscador</label>
+                <input type="text" class="form-control" id="autocomplete">
+            </div>
+        </div>
+    </div>
     <div id="map">
 
     </div>
+
     <!----- Scripts ----->
     
     <script type="text/javascript">
         let map;
+        var service;
+        let marker;
+        let autocomplete;
         const coord = {
             lat: 21.17429,
             lng: -86.84656
         };
+        
         function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'),{
-            zoom: 10,
-            center: coord
+            map = new google.maps.Map(document.getElementById('map'),{
+                zoom: 10,
+                center: coord
             });
-            var marker = new google.maps.Marker({
-            position: coord,
-            map: map
+            marker = new google.maps.Marker({
+                position: coord,
+                map: map
             });
+            initAutocomplete();
+        }
+        function initAutocomplete() {
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'),
+                {
+                    componentRestrictions:{
+                    'country':['MX']
+                    },
+                });
+            autocomplete.addListener("place_changed", function () {
+                const place = autocomplete.getPlace();
+                map.setCenter(place.geometry.location);
+                marker.setPosition(place.geometry.location);
+            })
+            
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzvHjlK9OzLhV2Ak6oIcn5HM6AiVrSPGE&callback=initMap" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4yKqAIHJOUIZlJuIfv_nGXZA8VkyzEj4&libraries=places&callback=initMap" defer></script>
 </body>
 </html>
